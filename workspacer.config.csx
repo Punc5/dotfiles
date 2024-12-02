@@ -47,15 +47,15 @@ Action<IConfigContext> doConfig = (context) =>
         // Left Widgets
         LeftWidgets = () => new IBarWidget[]
         {
-            new WorkspaceWidget(), new TextWidget(": "), new TitleWidget() {
+            new WorkspaceWidget(), new TextWidget("|"), new TitleWidget() {
                 IsShortTitle = true,
             }
         },
         // Right Widgets
         RightWidgets = () => new IBarWidget[]
         {
-            new TextWidget("[ workspacer ]"),
-            new TimeWidget(1000, "[ HH:mm:ss ] [ dd-MM-yyyy ]"),
+            new TextWidget("workspacer"),
+            new TimeWidget(1000, "| HH:mm:ss ¦ dd-MM-yyyy |"),
             new ActiveLayoutWidget(),
         }
     });
@@ -68,14 +68,16 @@ Action<IConfigContext> doConfig = (context) =>
     var actionMenuBuilder = actionMenu.DefaultMenu;
 
     // Action menu - Recycle Bin
+    /*
     actionMenuBuilder.AddFreeForm("Recycle Bin", (o) =>
     {
         System.Diagnostics.Process.Start("explorer.exe", "shell:recyclebinfolder");
     });
+    */
 
     // Workspaces
     context.WorkspaceContainer.CreateWorkspaces("Main", "Browsers", "Code", "Work", "Sound", "Chat", "Gaming", "Other");
-    context.CanMinimizeWindows = true;
+    context.CanMinimizeWindows = false;
     
     // Default layouts
     Func<ILayoutEngine[]> defaultLayouts = () => new ILayoutEngine[]
@@ -108,7 +110,7 @@ Action<IConfigContext> doConfig = (context) =>
 
     context.WindowRouter.RouteProcessName("VSCodium", "Code");
 
-    context.WindowRouter.RouteProcessName("Desktop\\YouTube", "Sound");
+    // context.WindowRouter.RouteProcessName("Desktop\\YouTube", "Sound");
     // context.WindowRouter.RouteProcessName("SteelSeries", "Sound");
 
     context.WindowRouter.RouteProcessName("Discord", "Chat");
@@ -120,7 +122,7 @@ Action<IConfigContext> doConfig = (context) =>
     context.WindowRouter.RouteProcessName("steam", "Gaming");
 
     // Filter
-    context.WindowRouter.AddFilter((window) => !window.ProcessFileName.Equals("cs2"));
+    // context.WindowRouter.AddFilter((window) => !window.ProcessFileName.Equals("cs2"));
 
     // Keybindings
     context.Keybinds.Subscribe(KeyModifiers.Win | KeyModifiers.Control, Keys.M, () =>
