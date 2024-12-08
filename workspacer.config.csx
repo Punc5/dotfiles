@@ -117,8 +117,7 @@ Action<IConfigContext> doConfig = (context) =>
     context.WindowRouter.RouteProcessName("VSCodium", "Terminal+Code");
 
     context.WindowRouter.RouteProcessName("SteelSeries", "Sound");
-    context.WindowRouter.RouteProcessName("SteelSeries GG", "Sound");
-    context.WindowRouter.RouteProcessName("SteelSeries GG Client", "Sound");
+    context.WindowRouter.RouteProcessName("SteelSeriesGGClient", "Sound");
     context.WindowRouter.RouteProcessName("Spotify", "Sound");
 
     context.WindowRouter.RouteProcessName("Discord", "Chat");
