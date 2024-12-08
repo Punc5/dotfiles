@@ -47,13 +47,18 @@ Action<IConfigContext> doConfig = (context) =>
         // Left Widgets
         LeftWidgets = () => new IBarWidget[]
         {
-            new WorkspaceWidget(), new TextWidget("|"), new TitleWidget() {
+            new WorkspaceWidget(),
+            new TextWidget("                                      "),
+            new TitleWidget()
+            {
                 IsShortTitle = true,
             }
         },
+
         // Right Widgets
         RightWidgets = () => new IBarWidget[]
         {
+            new TextWidget("                   "),
             new TextWidget("workspacer"),
             new TimeWidget(1000, "| HH:mm:ss ¦ dd-MM-yyyy |"),
             new ActiveLayoutWidget(),
@@ -76,8 +81,8 @@ Action<IConfigContext> doConfig = (context) =>
     */
 
     // Workspaces
-    context.WorkspaceContainer.CreateWorkspaces("Main", "Browsers", "Code", "Work", "Sound", "Chat", "Gaming", "Other");
-    context.CanMinimizeWindows = false;
+    context.WorkspaceContainer.CreateWorkspaces("Main", "Browsers", "Terminal+Code", "Work", "Sound", "Chat", "Gaming", "Other");
+    context.CanMinimizeWindows = true;
     
     // Default layouts
     Func<ILayoutEngine[]> defaultLayouts = () => new ILayoutEngine[]
@@ -108,10 +113,13 @@ Action<IConfigContext> doConfig = (context) =>
     context.WindowRouter.RouteProcessName("brave", "Browsers");
     context.WindowRouter.RouteProcessName("Tor", "Browsers");
 
-    context.WindowRouter.RouteProcessName("VSCodium", "Code");
+    context.WindowRouter.RouteProcessName("WindowsTerminal", "Terminal+Code");
+    context.WindowRouter.RouteProcessName("VSCodium", "Terminal+Code");
 
-    // context.WindowRouter.RouteProcessName("Desktop\\YouTube", "Sound");
-    // context.WindowRouter.RouteProcessName("SteelSeries", "Sound");
+    context.WindowRouter.RouteProcessName("SteelSeries", "Sound");
+    context.WindowRouter.RouteProcessName("SteelSeries GG", "Sound");
+    context.WindowRouter.RouteProcessName("SteelSeries GG Client", "Sound");
+    context.WindowRouter.RouteProcessName("Spotify", "Sound");
 
     context.WindowRouter.RouteProcessName("Discord", "Chat");
     context.WindowRouter.RouteProcessName("Messenger", "Chat");
@@ -121,8 +129,10 @@ Action<IConfigContext> doConfig = (context) =>
     context.WindowRouter.RouteProcessName("steamwebhelper", "Gaming");
     context.WindowRouter.RouteProcessName("steam", "Gaming");
 
-    // Filter
-    // context.WindowRouter.AddFilter((window) => !window.ProcessFileName.Equals("cs2"));
+    // Filters
+    context.WindowRouter.AddFilter((window) => !window.Title.Contains("cs2"));
+    context.WindowRouter.AddFilter((window) => !window.Title.Contains("msiexec"));
+    context.WindowRouter.AddFilter((window) => !window.Title.Contains("Yubico Authenticator"));
 
     // Keybindings
     context.Keybinds.Subscribe(KeyModifiers.Win | KeyModifiers.Control, Keys.M, () =>
