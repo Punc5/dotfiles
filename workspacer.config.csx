@@ -48,7 +48,7 @@ Action<IConfigContext> doConfig = (context) =>
         LeftWidgets = () => new IBarWidget[]
         {
             new WorkspaceWidget(),
-            new TextWidget("                                      "),
+            new TextWidget("                        "),
             new TitleWidget()
             {
                 IsShortTitle = true,
@@ -81,7 +81,7 @@ Action<IConfigContext> doConfig = (context) =>
     */
 
     // Workspaces
-    context.WorkspaceContainer.CreateWorkspaces("Main", "Browsers", "Terminal+Code", "Work", "Sound", "Chat", "Gaming", "Other");
+    context.WorkspaceContainer.CreateWorkspaces("Main", "Browsers", "Terminal+Code", "Work+School", "Sound", "Chat", "Gaming", "Other");
     context.CanMinimizeWindows = true;
     
     // Default layouts
